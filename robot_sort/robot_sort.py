@@ -1,3 +1,20 @@
+"""
+Thoughts on the project-
+
+This feels like a bubble sorting issue, but given the movements of the robot, I think we're going to do these in smaller moves. 
+So what we want to do is start the robot at position 0, which is its default already.
+We want it to pick up the item in the 0 position. Then we want it to move to the right.
+Compare items. If its bigger, swap out and move back to the start, otherwise just move to the right.
+When it reaches the end of the list, if it has been swapping the array in place, the list should be sorted.
+Set a flag to true or false if it has performed a swap this iteration. 
+If it passes over the whole list without swapping anything, return the item to position 0 and stop.
+The light feels like a built in flag... or a total red herring, hard to tell until I start digging into this.
+Things to be aware of-
+* Check to see if a move is legal before committing to it.
+* Only perform one swap before returning to the beginning and starting again.
+* While loops are likely more effective than for loops, since we would need to add logic to a for loop to see how often it would repeat.
+
+"""
 class SortingRobot:
     def __init__(self, l):
         """
@@ -96,8 +113,47 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        if not self.can_move_right(): #Checks to see starting position; best practice.
+            return
+        self.swap_item() #Pick up initial item.
+
+        while True:
+            while self.can_move_right(): #Check to see if it can move right.
+                self.move_right() #Move right if this is a legal move
+                if self.compare_item() == 1: #Compare the items you're holding.
+                    self.swap_item() #Swap if larger.
+            
+            while self.compare_item() != None: #Forces moves to the left.
+                self.move_left()
+            
+            self.swap_item() #Pick up a new item.
+            if not self.can_move_right(): #Checks to ensure starting position.
+                return
+            self.move_right() #Basically starts again
+            self.swap_item()
+
+
+        """
+        Tried a method using the light as a flag.
+        self.set_light_on()
+
+        while self.set_light_on():
+            self.swap_item()
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    
+            
+            while self.can_move_left() and self.compare_item() is not None:
+                self.move_left()
+            self.swap_item()
+            if self.can_move_right():
+                self.move_right()
+            else:
+                self.set_light_off()
+         """
+
 
 
 if __name__ == "__main__":
