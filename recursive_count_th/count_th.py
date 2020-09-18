@@ -4,12 +4,14 @@ Your function should return a count of how many occurences of ***"th"*** occur w
 Your function must utilize recursion. It cannot contain any loops.
 '''
 
-def count_th(word):
-    if len(word) == 0:
-        return 0
-    if word[0:2] == "th":
-        return count_th(word[1:]) +1
-    return count_th(word[1:])
+def count_th(word, count=0):
+    if len(word) < 2: #Checks if word is less than the size of th. If so, a th can't physically be present, return the current count.
+        return count
+    if word[:2] == "th": #Slice the word up, check if 0 and 1 are th.
+        count += 1 #Increase count if true.
+        return count_th(word[2:], count) #Use recursion. Eliminate those values and check again (since if th is present, the next value cannot also be th)
+    else:
+        return count_th(word[1:], count) #Otherwise take off 1 letter and use recursion to check again.
 
 """
 Too many pointers. Lets try another way.
