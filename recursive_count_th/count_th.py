@@ -4,6 +4,16 @@ Your function should return a count of how many occurences of ***"th"*** occur w
 Your function must utilize recursion. It cannot contain any loops.
 '''
 
+def count_th(word):
+    if len(word) < 2:
+        return 0
+    if word[:2] == 'th':
+        return 1 + count_th(word[2:]) #Only real fundamental change from previous notation is returning a set value that it adds to itself.
+    else:
+        return count_th(word[1:])
+
+"""
+This absolutely works, but I'm worried that having two inputs is illegal. Lets try with just an adding up.
 def count_th(word, count=0):
     if len(word) < 2: #Checks if word is less than the size of th. If so, a th can't physically be present, return the current count.
         return count
@@ -12,7 +22,7 @@ def count_th(word, count=0):
         return count_th(word[2:], count) #Use recursion. Eliminate those values and check again (since if th is present, the next value cannot also be th)
     else:
         return count_th(word[1:], count) #Otherwise take off 1 letter and use recursion to check again.
-
+"""
 """
 Too many pointers. Lets try another way.
 def count_th(word, count=0, track=0):
