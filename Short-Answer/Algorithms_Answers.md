@@ -11,10 +11,14 @@ b)
 I believe that nested for loops yield a O(n^2). If there were more nested loops, the ^2 would go up per loop.
 Because the function needs to run a number of times times a number of times, the cost to solve the function increases in a polynomial fashion. As n becomes larger, both for loops will have to run an order of magnitude larger.
 
+### Actual answer is O(nlogn) because of the j.
+
 c)
 Fibonacci functions are usually O(2^n). This one is a little tricky since its not returning:
 return bunnyEars(bunnies-2) + bunnyEars(bunnies-1)
 Adding a constant value rather than a second recursion feels like it would simplify the run time, but ultimately I believe that this is still an exponetially growing run time based on the value of n.
+
+### Just O(n) because this loops through a single time with a flat value.
 
 ## Exercise II
 
